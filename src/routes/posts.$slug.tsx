@@ -164,7 +164,7 @@ function PostDetail() {
               <span className="text-border">·</span>
               <span>{post.readingTime} min read</span>
               <span className="ml-1 flex flex-wrap gap-1.5">
-                {post.tags.map((t) => (
+                {post.tags.map((t: string) => (
                   <Link
                     key={t}
                     to="/tags"
