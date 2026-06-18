@@ -9,38 +9,138 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WriteRouteImport } from './routes/write'
+import { Route as TagsRouteImport } from './routes/tags'
+import { Route as PostsRouteImport } from './routes/posts'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PostsIndexRouteImport } from './routes/posts.index'
+import { Route as PostsSlugRouteImport } from './routes/posts.$slug'
 
+const WriteRoute = WriteRouteImport.update({
+  id: '/write',
+  path: '/write',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TagsRoute = TagsRouteImport.update({
+  id: '/tags',
+  path: '/tags',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PostsRoute = PostsRouteImport.update({
+  id: '/posts',
+  path: '/posts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PostsIndexRoute = PostsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PostsRoute,
+} as any)
+const PostsSlugRoute = PostsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => PostsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/posts': typeof PostsRouteWithChildren
+  '/tags': typeof TagsRoute
+  '/write': typeof WriteRoute
+  '/posts/$slug': typeof PostsSlugRoute
+  '/posts/': typeof PostsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/tags': typeof TagsRoute
+  '/write': typeof WriteRoute
+  '/posts/$slug': typeof PostsSlugRoute
+  '/posts': typeof PostsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/posts': typeof PostsRouteWithChildren
+  '/tags': typeof TagsRoute
+  '/write': typeof WriteRoute
+  '/posts/$slug': typeof PostsSlugRoute
+  '/posts/': typeof PostsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/posts'
+    | '/tags'
+    | '/write'
+    | '/posts/$slug'
+    | '/posts/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/about' | '/tags' | '/write' | '/posts/$slug' | '/posts'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/posts'
+    | '/tags'
+    | '/write'
+    | '/posts/$slug'
+    | '/posts/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  PostsRoute: typeof PostsRouteWithChildren
+  TagsRoute: typeof TagsRoute
+  WriteRoute: typeof WriteRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/write': {
+      id: '/write'
+      path: '/write'
+      fullPath: '/write'
+      preLoaderRoute: typeof WriteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tags': {
+      id: '/tags'
+      path: '/tags'
+      fullPath: '/tags'
+      preLoaderRoute: typeof TagsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/posts': {
+      id: '/posts'
+      path: '/posts'
+      fullPath: '/posts'
+      preLoaderRoute: typeof PostsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +148,42 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/posts/': {
+      id: '/posts/'
+      path: '/'
+      fullPath: '/posts/'
+      preLoaderRoute: typeof PostsIndexRouteImport
+      parentRoute: typeof PostsRoute
+    }
+    '/posts/$slug': {
+      id: '/posts/$slug'
+      path: '/$slug'
+      fullPath: '/posts/$slug'
+      preLoaderRoute: typeof PostsSlugRouteImport
+      parentRoute: typeof PostsRoute
+    }
   }
 }
 
+interface PostsRouteChildren {
+  PostsSlugRoute: typeof PostsSlugRoute
+  PostsIndexRoute: typeof PostsIndexRoute
+}
+
+const PostsRouteChildren: PostsRouteChildren = {
+  PostsSlugRoute: PostsSlugRoute,
+  PostsIndexRoute: PostsIndexRoute,
+}
+
+const PostsRouteWithChildren = PostsRoute._addFileChildren(PostsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  PostsRoute: PostsRouteWithChildren,
+  TagsRoute: TagsRoute,
+  WriteRoute: WriteRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
