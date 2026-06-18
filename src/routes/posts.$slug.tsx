@@ -142,7 +142,7 @@ function PostDetail() {
   useEffect(() => {
     const rendered = renderMarkdown(post.content).replace(
       /<h2>([^<]+)<\/h2>/g,
-      (_m, t) => {
+      (_m: string, t: string) => {
         const id = String(t).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
         return `<h2 id="${id}">${t}</h2>`;
       },
