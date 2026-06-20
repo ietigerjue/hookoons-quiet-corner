@@ -1,16 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { POSTS, formatDate } from "@/lib/posts";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/tags")({
-  head: () => ({
-    meta: [
-      { title: "Tags — Hookoon's Blog" },
-      { name: "description", content: "Browse all topics and tags across the blog." },
-      { property: "og:title", content: "Tags — Hookoon's Blog" },
-      { property: "og:description", content: "Browse all topics and tags." },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "Tags",
+      description: "Browse all topics and tags across the blog.",
+      path: "/tags",
+    }),
   component: TagsPage,
 });
 
@@ -27,9 +26,7 @@ function TagsPage() {
   return (
     <div className="mx-auto max-w-6xl px-5 py-10 sm:py-14">
       <header className="max-w-2xl fade-up">
-        <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-          Index
-        </div>
+        <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Index</div>
         <h1 className="mt-2 font-display text-4xl tracking-tight text-foreground sm:text-5xl">
           Tags
         </h1>
@@ -70,7 +67,7 @@ function TagsPage() {
             {related.map((p) => (
               <li key={p.slug}>
                 <Link
-                  to="/posts/$slug"
+                  to="/blog/$slug"
                   params={{ slug: p.slug }}
                   className="flex flex-col gap-1 px-5 py-4 transition-colors hover:bg-secondary sm:flex-row sm:items-center sm:justify-between"
                 >

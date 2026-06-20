@@ -1,6 +1,5 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/react-query";
 import {
-  Outlet,
   Link,
   createRootRouteWithContext,
   useRouter,
@@ -11,8 +10,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { Navbar } from "@/components/site/Navbar";
-import { Footer } from "@/components/site/Footer";
+import { SiteShell } from "@/components/layout/SiteShell";
+import { siteConfig } from "@/lib/seo";
 
 function NotFoundComponent() {
   return (
@@ -79,24 +78,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Hookoon's Blog — Notes on AI, Materials Science & Product Building" },
-      {
-        name: "description",
-        content:
-          "A quiet space for structured thinking, experiments, and long-form writing on AI, agents, materials science, and personal growth.",
-      },
-      { name: "author", content: "Hookoon" },
-      { property: "og:title", content: "Hookoon's Blog" },
-      {
-        property: "og:description",
-        content:
-          "A quiet space for structured thinking, experiments, and long-form writing.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      { name: "author", content: siteConfig.author },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "sitemap", type: "application/xml", title: "Sitemap", href: "/sitemap.xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -113,7 +99,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="zh-CN">
       <head>
         <HeadContent />
       </head>
@@ -128,15 +114,5 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <div className="flex min-h-screen flex-col bg-background">
-        <Navbar />
-        <main className="flex-1">
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
-    </QueryClientProvider>
-  );
+  return <SiteShell queryClient={queryClient} />;
 }

@@ -1,0 +1,17 @@
+export function Footer() {
+  return (
+    <footer className="mt-16 border-t border-border sm:mt-24">
+      <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 px-4 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:px-5 sm:py-10">
+        <div>
+          <div className="font-display text-foreground">Hookoon&rsquo;s Blog</div>
+          <div className="mt-1 max-w-md text-[13px] leading-relaxed">
+            A quiet space for structured thinking and long-form writing.
+          </div>
+        </div>
+        <div className="text-[13px] leading-relaxed">
+          © {new Date().getFullYear()} Hookoon · Built with care
+        </div>
+      </div>
+    </footer>
+  );
+}

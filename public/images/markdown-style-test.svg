@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Markdown style test image</title>
+  <desc id="desc">A quiet editorial placeholder image for testing Markdown image layout.</desc>
+  <rect width="1200" height="675" fill="#f4f3ef"/>
+  <rect x="80" y="80" width="1040" height="515" rx="28" fill="#ffffff" stroke="#dedbd3" stroke-width="2"/>
+  <circle cx="178" cy="180" r="52" fill="#d9d6d0"/>
+  <path d="M280 185h610M280 255h450M150 398h900M150 470h760" stroke="#2f3437" stroke-width="22" stroke-linecap="round" opacity="0.18"/>
+  <path d="M150 548h360" stroke="#2f3437" stroke-width="16" stroke-linecap="round" opacity="0.12"/>
+</svg>

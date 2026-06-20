@@ -1,0 +1,66 @@
+{
+  "site": "http://localhost:3000",
+  "entries": [
+    {
+      "title": "Hookoon's Quiet Corner",
+      "url": "http://localhost:3000/",
+      "path": "/",
+      "lastmod": "2026-06-20",
+      "tags": []
+    },
+    {
+      "title": "Blog",
+      "url": "http://localhost:3000/blog",
+      "path": "/blog",
+      "lastmod": "2026-06-20",
+      "tags": []
+    },
+    {
+      "title": "Projects",
+      "url": "http://localhost:3000/projects",
+      "path": "/projects",
+      "lastmod": "2026-06-20",
+      "tags": []
+    },
+    {
+      "title": "About",
+      "url": "http://localhost:3000/about",
+      "path": "/about",
+      "lastmod": "2026-06-20",
+      "tags": []
+    },
+    {
+      "title": "My Agent Learning Notes",
+      "url": "http://localhost:3000/blog/my-agent-learning-notes",
+      "path": "/blog/my-agent-learning-notes",
+      "lastmod": "2026-06-20",
+      "tags": [
+        "Agent",
+        "AI",
+        "Notes"
+      ]
+    },
+    {
+      "title": "From Lovable Prototype to Real Blog",
+      "url": "http://localhost:3000/blog/lovable-to-real-blog",
+      "path": "/blog/lovable-to-real-blog",
+      "lastmod": "2026-06-19",
+      "tags": [
+        "Blog",
+        "Coding",
+        "Product"
+      ]
+    },
+    {
+      "title": "Why I Build This Blog",
+      "url": "http://localhost:3000/blog/why-i-build-this-blog",
+      "path": "/blog/why-i-build-this-blog",
+      "lastmod": "2026-06-18",
+      "tags": [
+        "Blog",
+        "Notes",
+        "Product"
+      ]
+    }
+  ]
+}
