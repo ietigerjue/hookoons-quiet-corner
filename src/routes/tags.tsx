@@ -7,7 +7,8 @@ export const Route = createFileRoute("/tags")({
   head: () =>
     seo({
       title: "Tags",
-      description: "Browse all topics and tags across the blog.",
+      description:
+        "Browse all topics and tags across the blog. 浏览博客里的所有主题标签，快速找到相关系列和文章。",
       path: "/tags",
     }),
   component: TagsPage,
@@ -30,8 +31,11 @@ function TagsPage() {
         <h1 className="mt-2 font-display text-4xl tracking-tight text-foreground sm:text-5xl">
           Tags
         </h1>
-        <p className="mt-3 text-[15.5px] leading-relaxed text-muted-foreground">
-          A topic-level view of everything written so far. Click a tag to see related posts.
+        <p className="mt-3 space-y-1 text-[15.5px] leading-relaxed text-muted-foreground">
+          <span className="block">
+            A topic-level view of everything written so far. Click a tag to see related posts.
+          </span>
+          <span className="block">按主题浏览目前发布的所有文章。点击标签可以查看相关内容。</span>
         </p>
       </header>
 
@@ -63,6 +67,7 @@ function TagsPage() {
           <h2 className="font-display text-2xl text-foreground">
             Posts in <span className="italic">{active}</span>
           </h2>
+          <p className="mt-1 text-sm text-muted-foreground">该标签下的相关文章列表。</p>
           <ul className="mt-5 divide-y divide-border rounded-2xl border border-border bg-card">
             {related.map((p) => (
               <li key={p.slug}>

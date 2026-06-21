@@ -25,6 +25,18 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>http://localhost:3000/projects/ai-agent-workflow-lab</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>http://localhost:3000/projects/myblog-engineering-log</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>http://localhost:3000/blog/my-agent-learning-notes</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>

@@ -7,7 +7,7 @@ export const Route = createFileRoute("/about")({
     buildSeo({
       title: "About",
       description:
-        "关于 Hookoon，以及这个个人博客记录的方向：AI Agent、个人项目、材料学习、价格行为学笔记和长期思考。",
+        "About Hookoon and this blog: AI agents, personal projects, materials learning, price action notes, and long-term thinking. 关于 Hookoon，以及这个个人博客记录的方向：AI Agent、个人项目、材料学习、价格行为学笔记和长期思考。",
       path: "/about",
     }),
   component: AboutPage,
@@ -21,20 +21,32 @@ function AboutPage() {
         <h1 className="mt-2 text-balance font-display text-[clamp(2.25rem,11vw,3.75rem)] font-medium leading-[1.08] tracking-tight text-foreground">
           Hi, I&rsquo;m Hookoon.
         </h1>
-        <p className="mt-6 text-[16.5px] leading-[1.8] text-muted-foreground sm:text-[18px]">
-          I write about AI tools, agent workflows, materials science, product building, and personal
-          learning systems. I&rsquo;m also a fan of Al Brooks, so this blog will include notes on
-          price action and market structure alongside my project logs and long-form reflections.
+        <p className="mt-6 space-y-3 text-[16.5px] leading-[1.8] text-muted-foreground sm:text-[18px]">
+          <span className="block">
+            I write about AI tools, agent workflows, materials science, product building, and
+            personal learning systems. I&rsquo;m also a fan of Al Brooks, so this blog includes
+            notes on price action and market structure alongside my project logs and long-form
+            reflections.
+          </span>
+          <span className="block">
+            我会在这里记录 AI 工具、Agent 工作流、材料学习、产品构建和个人学习系统。我也是 Al Brooks
+            的粉丝，所以博客也会持续分享价格行为学、市场结构和交易观察相关笔记。
+          </span>
         </p>
       </header>
 
       <section className="mt-12 grid gap-9 sm:mt-14 sm:gap-10">
         <Block title="Current focus">
-          <p>
-            Building small agent systems for everyday research, and preparing for the MATE program
-            at HKUST. Most weeks I&rsquo;m oscillating between a code editor, a stack of papers, and
-            a very long Notion page.
-          </p>
+          <div className="space-y-3">
+            <p>
+              Building small agent systems for everyday research, preparing for the MATE program at
+              HKUST, and turning recurring learning work into durable notes.
+            </p>
+            <p>
+              目前我在搭建日常研究用的小型 Agent 系统，准备 HKUST 的 MATE
+              项目，也在把重复出现的学习任务整理成可以长期复用的笔记。
+            </p>
+          </div>
         </Block>
 
         <Block title="Topics I write about">

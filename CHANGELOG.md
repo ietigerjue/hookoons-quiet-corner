@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-06-21
+
+### Changed
+
+- Updated the Blog and About page descriptions to use bilingual English-first, Chinese-second copy.
+- Reworked `/projects` into a project-series index with `/projects/$slug` detail pages that list matching blog posts.
+- Made project cards derive from published post frontmatter so new `project` values create series cards and empty series disappear automatically.
+- Updated About current focus and Tags page copy to use bilingual English-first, Chinese-second descriptions.
+
 ## 2026-06-20
 
 ### Added

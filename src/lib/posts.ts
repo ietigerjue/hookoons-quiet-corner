@@ -9,6 +9,11 @@ export type PostFrontmatter = {
   draft?: boolean;
   publish?: boolean;
   source?: "obsidian" | "seed" | string;
+  project?: string;
+  projectName?: string;
+  projectTitleZh?: string;
+  projectDescription?: string;
+  projectDescriptionZh?: string;
   featured?: boolean;
 };
 
@@ -25,6 +30,11 @@ export type Post = {
   draft?: boolean;
   publish?: boolean;
   source?: string;
+  project?: string;
+  projectName?: string;
+  projectTitleZh?: string;
+  projectDescription?: string;
+  projectDescriptionZh?: string;
   content: string;
 };
 
@@ -113,6 +123,29 @@ function estimateReadingTime(content: string) {
   return Math.max(1, Math.ceil(latinWords / 220 + cjkChars / 450));
 }
 
+function normalizeProjectSlug(value: string) {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/['"]/g, "")
+    .replace(/[^\p{L}\p{N}]+/gu, "-")
+    .replace(/^-+|-+$/g, "")
+    .replace(/-{2,}/g, "-");
+}
+
+function titleFromProjectValue(value: string) {
+  const trimmed = value.trim();
+  if (!trimmed) return "";
+  return trimmed
+    .replace(/[-_]+/g, " ")
+    .replace(/\s+/g, " ")
+    .replace(/\b[a-z]/g, (char) => char.toUpperCase());
+}
+
+function optionalString(value: unknown) {
+  return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
+
 function toPost(filePath: string, raw: string): Post {
   const filename = pathParts(filePath);
   const { frontmatter, content } = parseFrontmatter(raw, filePath);
@@ -146,6 +179,13 @@ function toPost(filePath: string, raw: string): Post {
 
   const draft = typeof frontmatter.draft === "boolean" ? frontmatter.draft : false;
   const publish = typeof frontmatter.publish === "boolean" ? frontmatter.publish : undefined;
+  const projectValue = optionalString(frontmatter.project);
+  const project = projectValue ? normalizeProjectSlug(projectValue) : undefined;
+
+  if (projectValue && !project) {
+    throw new Error(`${filePath}: frontmatter "project" must contain letters or numbers`);
+  }
+
   return {
     slug: slugValue,
     title,
@@ -162,6 +202,11 @@ function toPost(filePath: string, raw: string): Post {
     draft,
     publish,
     source: typeof frontmatter.source === "string" ? frontmatter.source : undefined,
+    project,
+    projectName: projectValue ? titleFromProjectValue(projectValue) : undefined,
+    projectTitleZh: optionalString(frontmatter.projectTitleZh),
+    projectDescription: optionalString(frontmatter.projectDescription),
+    projectDescriptionZh: optionalString(frontmatter.projectDescriptionZh),
     content,
   };
 }

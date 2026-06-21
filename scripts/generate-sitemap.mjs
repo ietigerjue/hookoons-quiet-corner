@@ -78,6 +78,10 @@ function getPosts() {
         title: frontmatter.title ?? slug,
         date: typeof frontmatter.date === "string" ? frontmatter.date : date,
         tags: Array.isArray(frontmatter.tags) ? frontmatter.tags.map(String) : [],
+        project:
+          typeof frontmatter.project === "string"
+            ? normalizeProjectSlug(frontmatter.project)
+            : undefined,
         draft: frontmatter.draft === true || frontmatter.publish === false,
         changefreq: "monthly",
         priority: frontmatter.featured === true ? "0.8" : "0.7",
@@ -85,6 +89,35 @@ function getPosts() {
     })
     .filter((post) => !post.draft)
     .sort((a, b) => b.date.localeCompare(a.date));
+}
+
+function normalizeProjectSlug(value) {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/['"]/g, "")
+    .replace(/[^\p{L}\p{N}]+/gu, "-")
+    .replace(/^-+|-+$/g, "")
+    .replace(/-{2,}/g, "-");
+}
+
+function titleFromSlug(slug) {
+  return slug
+    .replace(/[-_]+/g, " ")
+    .replace(/\s+/g, " ")
+    .replace(/\b[a-z]/g, (char) => char.toUpperCase());
+}
+
+function getProjects(posts) {
+  const projectSlugs = new Set(posts.map((post) => post.project).filter(Boolean));
+  return Array.from(projectSlugs)
+    .sort((a, b) => a.localeCompare(b))
+    .map((slug) => ({
+      path: `/projects/${slug}`,
+      title: titleFromSlug(slug),
+      changefreq: "monthly",
+      priority: "0.6",
+    }));
 }
 
 function sitemapXml(entries) {
@@ -115,9 +148,11 @@ Sitemap: ${absoluteUrl("/sitemap.xml")}
 }
 
 const posts = getPosts();
+const projects = getProjects(posts);
 const newestPostDate = posts[0]?.date ?? new Date().toISOString().slice(0, 10);
 const entries = [
   ...staticPages.map((page) => ({ ...page, lastmod: newestPostDate })),
+  ...projects.map((project) => ({ ...project, lastmod: newestPostDate })),
   ...posts.map((post) => ({ ...post, lastmod: post.date })),
 ];
 

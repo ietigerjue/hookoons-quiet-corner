@@ -10,7 +10,8 @@ export const Route = createFileRoute("/blog/")({
   head: () =>
     buildSeo({
       title: "Blog",
-      description: "Hookoon 的博客文章，记录 AI Agent、工具实践、个人项目、材料学习和长期思考。",
+      description:
+        "Essays, project logs, and notes on AI agents, personal projects, materials learning, price action, and long-term thinking. 这里记录 AI Agent、个人项目、材料学习、价格行为学笔记与长期思考。",
       path: "/blog",
     }),
   component: BlogPage,
@@ -47,8 +48,14 @@ function BlogPage() {
         <h1 className="mt-2 font-display text-[2.5rem] leading-tight tracking-tight text-foreground sm:text-5xl">
           Blog
         </h1>
-        <p className="mt-3 text-[15.5px] leading-relaxed text-muted-foreground">
-          Essays, project logs, and notes published from the local Obsidian workflow.
+        <p className="mt-3 space-y-1 text-[15.5px] leading-relaxed text-muted-foreground">
+          <span className="block">
+            Essays, project logs, and notes on AI agents, personal projects, materials learning,
+            price action, and long-term thinking.
+          </span>
+          <span className="block">
+            这里记录 AI Agent、个人项目、材料学习、价格行为学笔记与长期思考。
+          </span>
         </p>
       </header>
 

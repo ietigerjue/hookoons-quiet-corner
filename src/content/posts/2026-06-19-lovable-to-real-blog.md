@@ -7,6 +7,7 @@ tags: ["Blog", "Coding", "Product"]
 cover: ""
 draft: false
 source: "obsidian"
+project: "MyBlog Engineering Log"
 ---
 
 The first version of this site came from Lovable. That was useful because it gave the blog a mood quickly: quiet typography, simple cards, and a homepage that already felt personal.

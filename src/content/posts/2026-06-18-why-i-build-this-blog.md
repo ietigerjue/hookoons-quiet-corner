@@ -8,6 +8,7 @@ cover: ""
 draft: false
 source: "obsidian"
 featured: true
+project: "MyBlog Engineering Log"
 ---
 
 I build this blog because I want a place that rewards slow attention. Feeds are good at velocity, but most of the things I care about need revision, context, and a calmer surface.

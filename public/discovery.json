@@ -30,6 +30,20 @@
       "tags": []
     },
     {
+      "title": "Ai Agent Workflow Lab",
+      "url": "http://localhost:3000/projects/ai-agent-workflow-lab",
+      "path": "/projects/ai-agent-workflow-lab",
+      "lastmod": "2026-06-20",
+      "tags": []
+    },
+    {
+      "title": "Myblog Engineering Log",
+      "url": "http://localhost:3000/projects/myblog-engineering-log",
+      "path": "/projects/myblog-engineering-log",
+      "lastmod": "2026-06-20",
+      "tags": []
+    },
+    {
       "title": "My Agent Learning Notes",
       "url": "http://localhost:3000/blog/my-agent-learning-notes",
       "path": "/blog/my-agent-learning-notes",
