@@ -6,7 +6,8 @@ export const Route = createFileRoute("/about")({
   head: () =>
     buildSeo({
       title: "About",
-      description: "关于 Hookoon，以及这个个人博客记录的方向。",
+      description:
+        "关于 Hookoon，以及这个个人博客记录的方向：AI Agent、个人项目、材料学习、价格行为学笔记和长期思考。",
       path: "/about",
     }),
   component: AboutPage,
@@ -22,8 +23,8 @@ function AboutPage() {
         </h1>
         <p className="mt-6 text-[16.5px] leading-[1.8] text-muted-foreground sm:text-[18px]">
           I write about AI tools, agent workflows, materials science, product building, and personal
-          learning systems. This blog is where I keep structured notes, project logs, and long-form
-          reflections.
+          learning systems. I&rsquo;m also a fan of Al Brooks, so this blog will include notes on
+          price action and market structure alongside my project logs and long-form reflections.
         </p>
       </header>
 
@@ -41,6 +42,7 @@ function AboutPage() {
             {[
               "AI agents & workflows",
               "Materials Science",
+              "Price action notes",
               "Product building",
               "Research notes",
               "Coding journal",

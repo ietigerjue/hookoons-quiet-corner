@@ -26,11 +26,12 @@ export function HeroSection() {
             Hookoon&rsquo;s Blog
           </h1>
           <p className="mt-5 inline-block max-w-full bg-[#d9d6d0] px-3 py-1.5 text-[16px] leading-relaxed text-foreground/85 sm:text-[18.5px]">
-            Notes on AI, Materials Science, Product Building, and Personal Growth.
+            Notes on AI, Materials Science, Price Action, and Personal Growth.
           </p>
           <br />
           <p className="mt-2 inline-block max-w-xl bg-[#f0eeea] px-3 py-1.5 text-[14.5px] leading-relaxed text-muted-foreground">
-            A quiet space for structured thinking, experiments, and long-form writing.
+            A quiet space for structured thinking, experiments, and Al Brooks-inspired price action
+            notes.
           </p>
         </div>
       </div>

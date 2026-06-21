@@ -6,12 +6,12 @@ let warnedMissingSiteUrl = false;
 
 export const siteConfig = {
   siteName: "Hookoon's Quiet Corner",
-  siteDescription: "记录 AI Agent、个人项目、材料学习与长期思考",
+  siteDescription: "记录 AI Agent、个人项目、材料学习、价格行为学笔记与长期思考",
   author: "Hookoon",
   defaultOgImage: "/images/og-default.png",
   // Backwards-compatible aliases used by existing layout code.
   name: "Hookoon's Quiet Corner",
-  description: "记录 AI Agent、个人项目、材料学习与长期思考",
+  description: "记录 AI Agent、个人项目、材料学习、价格行为学笔记与长期思考",
 };
 
 export function getSiteUrl() {

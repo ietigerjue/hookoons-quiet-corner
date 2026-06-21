@@ -4,6 +4,7 @@
 
 ### Added
 
+- Added `docs/vercel-deployment.md` with Vercel project settings, environment variables, preview/production strategy, local Publisher boundaries, and troubleshooting.
 - Added `docs/mobile-typography-checklist.md` for mobile and Markdown typography QA.
 - Added draft Markdown style test content at `src/content/posts/2026-06-20-markdown-style-test.md`.
 - Added a lightweight static Markdown test image at `public/images/markdown-style-test.svg`.
@@ -14,6 +15,10 @@
 
 ### Changed
 
+- Enabled Nitro explicitly for self-hosted Vercel builds with `nitro: { preset: "vercel" }` in `vite.config.ts`.
+- Ignored local `.vercel` build output.
+- Expanded README deployment instructions and clarified Vercel-only versus local-only environment variables.
+- Updated the home and about page descriptions to include Al Brooks-inspired price action notes.
 - Improved mobile layout resilience for Header, Footer, Home, Blog list, Blog detail, Projects, About, cards, tag filters, and post metadata.
 - Improved Chinese reading typography and Markdown rendering for headings, links, task lists, tables, images, inline code, code blocks, and long URLs.
 - Updated the root HTML language to `zh-CN` and added CJK-friendly font fallbacks.

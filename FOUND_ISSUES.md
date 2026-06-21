@@ -18,7 +18,13 @@ Suggested next step:
 
 - Import the repository into Vercel.
 - Confirm TanStack Start detection/build output.
-- Add `vercel.json` only if Vercel default detection fails.
+- Keep `vite.config.ts` on the explicit `nitro: { preset: "vercel" }` setting.
+- Add `vercel.json` only if a specific redirect/header requirement appears after preview verification.
+
+Status:
+
+- Partially mitigated locally by enabling the Nitro Vercel preset.
+- Still open until a real Vercel Preview or Production deployment is checked.
 
 ## 2. ESLint has shadcn Fast Refresh warnings
 

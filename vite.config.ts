@@ -7,6 +7,12 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  // Vercel deploys TanStack Start through Nitro. The Lovable wrapper only
+  // auto-enables Nitro inside Lovable's own build context, so self-hosted
+  // Vercel builds need an explicit preset.
+  nitro: {
+    preset: "vercel",
+  },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
