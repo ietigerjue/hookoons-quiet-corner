@@ -68,7 +68,7 @@ function inlineMarkdown(value: string) {
     .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, alt: string, src: string) => {
       const safeSrc = safeUrl(src);
       const safeAlt = alt.trim() || fallbackAlt(src);
-      return `<img src="${escapeAttr(safeSrc)}" alt="${escapeAttr(safeAlt)}" loading="lazy" decoding="async" />`;
+      return `<img src="${escapeAttr(safeSrc)}" alt="${escapeAttr(safeAlt)}" loading="lazy" decoding="async" data-markdown-image="true" role="button" tabindex="0" aria-label="Open image preview: ${escapeAttr(safeAlt)}" />`;
     })
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label: string, href: string) => {
       const safeHref = safeUrl(href);

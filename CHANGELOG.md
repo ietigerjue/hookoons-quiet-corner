@@ -6,6 +6,7 @@
 
 - Expanded Obsidian pasted-image resolution to scan sibling `图片` / `images` folders and optional `OBSIDIAN_IMAGE_DIRS` paths.
 - Documented `OBSIDIAN_IMAGE_DIRS` in the README, Vercel guide, Publisher Dashboard guide, and Obsidian publish workflow.
+- Added click-to-preview image viewing for Markdown blog article images, including mouse-wheel zoom and drag-to-pan.
 
 ## 2026-06-21
 

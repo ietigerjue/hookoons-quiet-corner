@@ -298,6 +298,19 @@
   border: 1px solid var(--color-border);
   margin: 1.5em 0;
 }
+.prose-blog img[data-markdown-image="true"] {
+  cursor: zoom-in;
+  transition:
+    opacity 160ms ease,
+    border-color 160ms ease;
+}
+.prose-blog img[data-markdown-image="true"]:hover {
+  border-color: color-mix(in oklch, var(--color-foreground) 28%, var(--color-border));
+}
+.prose-blog img[data-markdown-image="true"]:focus-visible {
+  outline: 2px solid color-mix(in oklch, var(--color-foreground) 45%, transparent);
+  outline-offset: 4px;
+}
 .prose-blog a {
   color: var(--color-foreground);
   text-decoration: underline;
