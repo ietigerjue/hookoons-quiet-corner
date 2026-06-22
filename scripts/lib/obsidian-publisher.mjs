@@ -294,10 +294,12 @@ function isLocalFileLink(ref) {
 }
 
 function transformOutsideCodeBlocks(body, transform) {
-  const fenceRe = /(```[\s\S]*?```)/g;
+  // Split on fenced code blocks AND inline code spans, protecting both from transformation.
+  // Order matters: fences first, then inline code in parts that aren't fences.
+  const fenceRe = /(```[\s\S]*?```|`[^`\n]+`)/g;
   return body
     .split(fenceRe)
-    .map((part) => (part.startsWith("```") ? part : transform(part)))
+    .map((part) => (part.startsWith("```") || (part.startsWith("`") && part.endsWith("`")) ? part : transform(part)))
     .join("");
 }
 
