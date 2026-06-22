@@ -70,6 +70,16 @@ function inlineMarkdown(value: string) {
       const safeAlt = alt.trim() || fallbackAlt(src);
       return `<img src="${escapeAttr(safeSrc)}" alt="${escapeAttr(safeAlt)}" loading="lazy" decoding="async" data-markdown-image="true" role="button" tabindex="0" aria-label="Open image preview: ${escapeAttr(safeAlt)}" />`;
     })
+    .replace(/!\[\[([^|\]]+)\|([^\]]+)\]\]/g, (_, ref: string, alt: string) => {
+      const safeSrc = escapeAttr(ref.trim());
+      const safeAlt = alt.trim() || fallbackAlt(ref);
+      return `<img src="${safeSrc}" alt="${escapeAttr(safeAlt)}" loading="lazy" decoding="async" data-markdown-image="true" role="button" tabindex="0" aria-label="Open image preview: ${escapeAttr(safeAlt)}" />`;
+    })
+    .replace(/!\[\[([^\]]+)\]\]/g, (_, ref: string) => {
+      const safeSrc = escapeAttr(ref.trim());
+      const safeAlt = fallbackAlt(ref);
+      return `<img src="${safeSrc}" alt="${escapeAttr(safeAlt)}" loading="lazy" decoding="async" data-markdown-image="true" role="button" tabindex="0" aria-label="Open image preview: ${escapeAttr(safeAlt)}" />`;
+    })
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label: string, href: string) => {
       const safeHref = safeUrl(href);
       const externalAttrs = isExternalUrl(safeHref)
