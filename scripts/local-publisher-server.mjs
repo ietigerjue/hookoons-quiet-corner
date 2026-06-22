@@ -615,6 +615,14 @@ async function start() {
     if (url.pathname.startsWith("/api/")) return handleApi(req, res, url);
     return notFound(res);
   });
+  server.on("error", (err) => {
+    if (err.code === "EADDRINUSE") {
+      console.error(`Port ${cfg.port} is already in use.`);
+      console.error("Stop the other process or change LOCAL_PUBLISHER_PORT in .env.local.");
+      process.exit(1);
+    }
+    throw err;
+  });
   server.listen(cfg.port, cfg.host, () => {
     const url = `http://${cfg.host}:${cfg.port}`;
     log(`publisher_ready: ${url}`);

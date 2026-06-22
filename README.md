@@ -73,6 +73,10 @@ The Local Publisher Dashboard is a local-only tool. Vercel deploys the committed
 
 Full deployment notes: `docs/vercel-deployment.md`.
 
+For custom domain setup through Cloudflare + Vercel, see `docs/deployment-cloudflare-vercel.md`.
+
+For the final domain smoke-test list, see `docs/domain-launch-checklist.md`.
+
 ## SEO and Site URL
 
 `VITE_SITE_URL` is used to generate canonical URLs, `sitemap.xml`, `robots.txt`, and Open Graph/Twitter sharing URLs.

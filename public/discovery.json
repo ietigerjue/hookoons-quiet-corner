@@ -55,18 +55,20 @@
       ]
     },
     {
-      "title": "From Lovable Prototype to Real Blog",
+      "title": "从 Lovable 原型到真实博客：一个本地 Publisher + Obsidian 部署工作流的诞生",
       "url": "http://localhost:3000/blog/lovable-to-real-blog",
       "path": "/blog/lovable-to-real-blog",
       "lastmod": "2026-06-19",
       "tags": [
         "Blog",
         "Coding",
-        "Product"
+        "Product",
+        "Obsidian",
+        "Workflow"
       ]
     },
     {
-      "title": "PA复盘",
+      "title": "2026-06-19-PA复盘",
       "url": "http://localhost:3000/blog/pa%E5%A4%8D%E7%9B%98",
       "path": "/blog/pa复盘",
       "lastmod": "2026-06-19",

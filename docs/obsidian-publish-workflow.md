@@ -106,13 +106,19 @@ If `cover` points to a local image, it is copied as `cover.{ext}` and the publis
 
 Missing images fail the publish. Existing generated images may be overwritten with a warning, but directories are not deleted.
 
-When resolving Obsidian image embeds, the publisher searches the note folder, the configured Blog folder, the vault root, common attachment folders, and sibling `图片` / `images` folders. For the current Memory Base workflow, this means images under:
+When resolving Obsidian image embeds, the publisher searches the note folder, the configured Blog folder, the vault root, common attachment folders, and sibling `图片` / `images` folders. For example, if your notes live under:
 
 ```text
-F:\VibeCoding\Codex和ClaudeCode\Memory Base\01_项目记录\个人博客\图片
+/path/to/your/obsidian/vault/Blog
 ```
 
-are found automatically when `OBSIDIAN_POSTS_DIR` points to the sibling `blog` folder. You can also set `OBSIDIAN_IMAGE_DIRS` explicitly. On Windows, separate multiple image folders with `;`.
+then images under the sibling folder below are found automatically:
+
+```text
+/path/to/your/obsidian/vault/图片
+```
+
+You can also set `OBSIDIAN_IMAGE_DIRS` explicitly. On Windows, separate multiple image folders with `;`.
 
 ## Wiki Links
 

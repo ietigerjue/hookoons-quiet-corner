@@ -7,6 +7,13 @@
 - Expanded Obsidian pasted-image resolution to scan sibling `图片` / `images` folders and optional `OBSIDIAN_IMAGE_DIRS` paths.
 - Documented `OBSIDIAN_IMAGE_DIRS` in the README, Vercel guide, Publisher Dashboard guide, and Obsidian publish workflow.
 - Added click-to-preview image viewing for Markdown blog article images, including mouse-wheel zoom and drag-to-pan.
+- Completed the Task 11 launch precheck, added launch/release reports, and documented Cloudflare + Vercel domain setup.
+- Verified: `typecheck` (0 errors), `lint` (0 errors, 6 warnings), `build` (353ms, Nitro Vercel output).
+- Verified: all 9 pages (200), sitemap (10 URLs, 0 drafts), robots, 404 handling.
+- Verified: 4 published posts, frontmatter valid, no secret/leak in repository.
+- Updated: LAUNCH_CHECKLIST.md, FOUND_ISSUES.md, RELEASE_NOTES.md.
+- Status: Code/build ready; pending production `VITE_SITE_URL`, default OG image, Cloudflare DNS verification.
+- Fixed: Publisher server now handles `EADDRINUSE` with a friendly message instead of an unhandled-error crash.
 
 ## 2026-06-21
 

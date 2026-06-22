@@ -1,98 +1,61 @@
 # Found Issues
 
-Date: 2026-06-18
+Task: Launch precheck / Task 11
+Date: 2026-06-22
 
-These issues are not current local blockers. They are intentionally left for a later, smaller pass.
+No blocking code/build issues found.
 
-## 1. Vercel deployment target still needs real preview verification
+## Issue 1
 
-Local `npm run build` passes, but the Lovable wrapper logs:
+- Title: Default Open Graph image asset is missing
+- Severity: Medium
+- Area: SEO
+- Impact: Pages emit complete Open Graph metadata, but `og:image` and `twitter:image` may resolve to a missing `/images/og-default.png` asset when a post does not define `cover`.
+- Evidence: `src/lib/seo.ts` uses `/images/og-default.png`; `public/images/README.md` documents the missing file; `public/images/og-default.png` does not exist.
+- Recommended Fix: Add a 1200x630 `public/images/og-default.png`, then run `npm run build` and test one URL in a social preview debugger.
+- Fixed: No
+- Notes: Not a build blocker, but should be fixed before public sharing.
 
-```text
-[@lovable.dev/vite-tanstack-config] No Lovable context detected — skipping nitro deploy plugin.
-```
+## Issue 2
 
-This is acceptable for local verification, but a real Vercel preview deployment should still be tested before calling production deployment ready.
+- Title: Production domain and `VITE_SITE_URL` still need real deployment verification
+- Severity: Medium
+- Area: Deployment / SEO
+- Impact: Local builds without `VITE_SITE_URL` fall back to `http://localhost:3000` for sitemap, robots, discovery, and SEO URLs. Production should generate the real domain.
+- Evidence: `scripts/generate-sitemap.mjs` and `src/lib/seo.ts` intentionally fall back to localhost; current local `public/sitemap.xml`, `public/robots.txt`, and `public/discovery.json` are generated from that fallback when no environment variable is set.
+- Recommended Fix: Set `VITE_SITE_URL=https://your-domain.com` in Vercel Production, redeploy, then verify `/sitemap.xml`, `/robots.txt`, canonical URLs, `og:url`, and `twitter:image`.
+- Fixed: No
+- Notes: This is expected local behavior and not a source-code blocker.
 
-Suggested next step:
+## Issue 3
 
-- Import the repository into Vercel.
-- Confirm TanStack Start detection/build output.
-- Keep `vite.config.ts` on the explicit `nitro: { preset: "vercel" }` setting.
-- Add `vercel.json` only if a specific redirect/header requirement appears after preview verification.
+- Title: Final Cloudflare/Vercel custom-domain verification is pending
+- Severity: Medium
+- Area: Deployment
+- Impact: The repository contains deployment guidance, but the real Vercel domain state, Cloudflare DNS records, TLS mode, and canonical redirect behavior require dashboard verification.
+- Evidence: No live production domain was provided to this task. `docs/deployment-cloudflare-vercel.md` and `docs/domain-launch-checklist.md` now document the required checks.
+- Recommended Fix: Complete the domain checklist after adding the real domain to Vercel and Cloudflare.
+- Fixed: No
+- Notes: Cannot be fully automated from the local repository.
 
-Status:
+## Issue 4
 
-- Partially mitigated locally by enabling the Nitro Vercel preset.
-- Still open until a real Vercel Preview or Production deployment is checked.
+- Title: ESLint reports generated shadcn/ui Fast Refresh warnings
+- Severity: Low
+- Area: Code
+- Impact: `npm run lint` exits successfully, but six generated shadcn/ui files warn about exporting non-component helpers from component files.
+- Evidence: `src/components/ui/badge.tsx`, `button.tsx`, `form.tsx`, `navigation-menu.tsx`, `sidebar.tsx`, and `toggle.tsx`.
+- Recommended Fix: Leave as-is unless Fast Refresh behavior becomes a development problem; split variant/helper exports in a later UI-maintenance pass if needed.
+- Fixed: No
+- Notes: Non-blocking.
 
-## 2. ESLint has shadcn Fast Refresh warnings
+## Issue 5
 
-`npm run lint` exits successfully, but reports six warnings from generated shadcn/ui files:
-
-- `src/components/ui/badge.tsx`
-- `src/components/ui/button.tsx`
-- `src/components/ui/form.tsx`
-- `src/components/ui/navigation-menu.tsx`
-- `src/components/ui/sidebar.tsx`
-- `src/components/ui/toggle.tsx`
-
-The warning is `react-refresh/only-export-components`. This is common in generated shadcn files that export component variants or helper constants.
-
-Suggested next step:
-
-- Leave as-is unless hot reload behavior becomes a real development problem.
-- If needed, split variant exports into companion files in a later UI-maintenance pass.
-
-## 3. Vite warns that `vite-tsconfig-paths` may be removable
-
-Build/dev logs include:
-
-```text
-The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option.
-```
-
-The current Lovable wrapper says it provides the path alias setup, and `@/*` imports work. No alias fix is needed now.
-
-Suggested next step:
-
-- Do not change this until after Vercel preview deploy is verified.
-- If simplifying later, remove `vite-tsconfig-paths` only together with a focused alias regression test.
-
-## 4. Dormant dependency candidates
-
-Several dependencies appear to be present because Lovable generated the full shadcn/ui component catalog. They may not all be used by visible blog pages.
-
-Examples:
-
-- `date-fns`
-- `zod`
-- `@hookform/resolvers`
-- `react-hook-form`
-- `recharts`
-- assorted Radix packages for unused generated UI primitives
-
-Suggested next step:
-
-- Do not remove dependencies in this stabilization pass.
-- Run a dedicated dependency audit after the first successful deployment baseline.
-
-## 5. Default Open Graph image asset still needs final artwork
-
-SEO metadata now points default sharing previews to `/images/og-default.png`, but the actual PNG asset has not been provided yet. A placeholder instruction file exists at `public/images/README.md`.
-
-Suggested next step:
-
-- Add `public/images/og-default.png` as a 1200x630 social preview image.
-- After adding it, run `npm run build` and check one article URL in a social preview debugger.
-
-## 6. Production `VITE_SITE_URL` still needs real domain verification
-
-The SEO and sitemap helpers correctly read `VITE_SITE_URL`, but local builds may generate localhost fallback URLs when that environment variable is missing. Do not hardcode the final production domain in source files.
-
-Suggested next step:
-
-- Set `VITE_SITE_URL=https://your-domain.com` in Vercel Production Environment Variables.
-- Redeploy after changing the environment variable.
-- Verify `/sitemap.xml`, `/robots.txt`, and page canonical URLs on the deployed site.
-- Run a source check such as `rg -n "localhost:3000" public dist` after a production-like build with the real environment variable.
+- Title: Mobile layout needs final human visual pass
+- Severity: Low
+- Area: Mobile
+- Impact: Code-level responsive checks and build checks passed, but exact breakpoints and touch feel need browser/device inspection.
+- Evidence: No automated visual regression tool is configured in this repository.
+- Recommended Fix: Use `docs/mobile-launch-check.md` to manually inspect 375px, 390px, 430px, 768px, 1024px, and 1440px.
+- Fixed: No
+- Notes: Non-blocking for preview, recommended before final public announcement.
