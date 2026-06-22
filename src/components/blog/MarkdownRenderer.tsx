@@ -27,6 +27,13 @@ function clampPreviewScale(value: number) {
   return Math.min(MAX_PREVIEW_SCALE, Math.max(MIN_PREVIEW_SCALE, value));
 }
 
+function pointerDist(
+  a: { clientX: number; clientY: number },
+  b: { clientX: number; clientY: number },
+) {
+  return Math.hypot(b.clientX - a.clientX, b.clientY - a.clientY);
+}
+
 export function MarkdownRenderer({
   markdown,
   className = "prose-blog",
@@ -41,6 +48,9 @@ export function MarkdownRenderer({
   const [previewPan, setPreviewPan] = useState<PreviewPan>({ x: 0, y: 0 });
   const [isDraggingPreview, setIsDraggingPreview] = useState(false);
   const previewDrag = useRef<PreviewDrag | null>(null);
+  const activePointers = useRef<Map<number, { clientX: number; clientY: number }>>(new Map());
+  const pinchBase = useRef<{ distance: number; scale: number } | null>(null);
+  const hasMoved = useRef(false);
   const html = useMemo(() => renderMarkdown(markdown, { headingIds }), [headingIds, markdown]);
 
   const openPreview = useCallback((target: EventTarget | null) => {
@@ -61,6 +71,9 @@ export function MarkdownRenderer({
     setPreviewScale(1);
     setPreviewPan({ x: 0, y: 0 });
     previewDrag.current = null;
+    pinchBase.current = null;
+    activePointers.current.clear();
+    hasMoved.current = false;
     setIsDraggingPreview(false);
   }, []);
 
@@ -141,8 +154,26 @@ export function MarkdownRenderer({
               });
             }}
             onPointerDown={(event) => {
-              event.preventDefault();
+              activePointers.current.set(event.pointerId, {
+                clientX: event.clientX,
+                clientY: event.clientY,
+              });
+
+              if (activePointers.current.size === 2) {
+                // Two fingers → start pinch
+                const [a, b] = [...activePointers.current.values()];
+                pinchBase.current = {
+                  distance: pointerDist(a, b),
+                  scale: previewScale,
+                };
+                previewDrag.current = null;
+                setIsDraggingPreview(false);
+                return;
+              }
+
+              // Single pointer → prepare drag or tap
               event.currentTarget.setPointerCapture(event.pointerId);
+              hasMoved.current = false;
               previewDrag.current = {
                 pointerId: event.pointerId,
                 startX: event.clientX,
@@ -153,24 +184,71 @@ export function MarkdownRenderer({
               setIsDraggingPreview(true);
             }}
             onPointerMove={(event) => {
+              // Update tracked pointer position
+              if (activePointers.current.has(event.pointerId)) {
+                activePointers.current.set(event.pointerId, {
+                  clientX: event.clientX,
+                  clientY: event.clientY,
+                });
+              }
+
+              // Pinch zoom
+              if (activePointers.current.size === 2 && pinchBase.current) {
+                const [a, b] = [...activePointers.current.values()];
+                const dist = pointerDist(a, b);
+                const scale =
+                  pinchBase.current.scale * (dist / pinchBase.current.distance);
+                setPreviewScale(clampPreviewScale(scale));
+                return;
+              }
+
+              // Single pointer pan
               const drag = previewDrag.current;
               if (!drag || drag.pointerId !== event.pointerId) return;
-              const nextX = drag.originX + event.clientX - drag.startX;
-              const nextY = drag.originY + event.clientY - drag.startY;
-              setPreviewPan({ x: nextX, y: nextY });
+              const dx = event.clientX - drag.startX;
+              const dy = event.clientY - drag.startY;
+              if (Math.abs(dx) > 3 || Math.abs(dy) > 3) hasMoved.current = true;
+              setPreviewPan({
+                x: drag.originX + dx,
+                y: drag.originY + dy,
+              });
             }}
             onPointerUp={(event) => {
+              activePointers.current.delete(event.pointerId);
+
               const drag = previewDrag.current;
-              if (!drag || drag.pointerId !== event.pointerId) return;
-              event.currentTarget.releasePointerCapture(event.pointerId);
-              previewDrag.current = null;
-              setIsDraggingPreview(false);
+              // Tap detection: single pointer, no movement, no pinch
+              if (
+                drag?.pointerId === event.pointerId &&
+                !hasMoved.current &&
+                !pinchBase.current
+              ) {
+                event.currentTarget.releasePointerCapture(event.pointerId);
+                previewDrag.current = null;
+                setIsDraggingPreview(false);
+                closePreview();
+                return;
+              }
+
+              // End drag
+              if (drag?.pointerId === event.pointerId) {
+                event.currentTarget.releasePointerCapture(event.pointerId);
+                previewDrag.current = null;
+                setIsDraggingPreview(false);
+              }
+
+              // End pinch when fewer than 2 pointers remain
+              if (activePointers.current.size < 2) {
+                pinchBase.current = null;
+              }
             }}
             onPointerCancel={(event) => {
-              const drag = previewDrag.current;
-              if (!drag || drag.pointerId !== event.pointerId) return;
-              previewDrag.current = null;
-              setIsDraggingPreview(false);
+              activePointers.current.delete(event.pointerId);
+              if (activePointers.current.size < 2) pinchBase.current = null;
+              if (previewDrag.current?.pointerId === event.pointerId) {
+                previewDrag.current = null;
+                setIsDraggingPreview(false);
+              }
             }}
             onWheel={(event) => {
               event.preventDefault();
