@@ -9,6 +9,7 @@ Create a local `.env.local` or shell environment with your private paths. The pu
 ```bash
 OBSIDIAN_VAULT_PATH=/path/to/your/obsidian/vault
 OBSIDIAN_POSTS_DIR=/path/to/your/obsidian/vault/Blog
+OBSIDIAN_IMAGE_DIRS=/path/to/your/obsidian/vault/图片
 VITE_SITE_URL=https://example.com
 ```
 
@@ -105,6 +106,14 @@ If `cover` points to a local image, it is copied as `cover.{ext}` and the publis
 
 Missing images fail the publish. Existing generated images may be overwritten with a warning, but directories are not deleted.
 
+When resolving Obsidian image embeds, the publisher searches the note folder, the configured Blog folder, the vault root, common attachment folders, and sibling `图片` / `images` folders. For the current Memory Base workflow, this means images under:
+
+```text
+F:\VibeCoding\Codex和ClaudeCode\Memory Base\01_项目记录\个人博客\图片
+```
+
+are found automatically when `OBSIDIAN_POSTS_DIR` points to the sibling `blog` folder. You can also set `OBSIDIAN_IMAGE_DIRS` explicitly. On Windows, separate multiple image folders with `;`.
+
 ## Wiki Links
 
 The publisher converts wiki links outside code fences:
@@ -192,5 +201,5 @@ It refuses to deploy when there are unresolved conflicts or already staged files
 - `OBSIDIAN_POSTS_DIR is required`: set `OBSIDIAN_POSTS_DIR` when publishing by filename.
 - `Post filename must be YYYY-MM-DD-title.md`: keep the `YYYY-MM-DD-` prefix and give the title part at least one letter or number after normalization.
 - `Frontmatter field "title" is required`: add the missing field.
-- `Referenced image not found`: move the image next to the note, under the vault root, or under `attachments` / `Attachments`.
+- `Referenced image not found`: move the image next to the note, under the vault root, under `attachments` / `Attachments`, under a sibling `图片` / `images` folder, or add the folder to `OBSIDIAN_IMAGE_DIRS`.
 - `build exited with status`: fix the reported build error before committing.

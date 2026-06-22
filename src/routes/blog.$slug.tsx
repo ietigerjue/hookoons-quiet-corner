@@ -69,15 +69,7 @@ function BlogPostDetail() {
               alt={post.title}
               className="mt-8 aspect-[16/9] w-full rounded-2xl border border-border object-cover sm:mt-10 sm:aspect-[16/8]"
             />
-          ) : (
-            <div className="mt-8 aspect-[16/9] overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-[color:var(--paper)] via-[color:var(--muted)] to-[color:var(--accent)] sm:mt-10 sm:aspect-[16/8]">
-              <div className="flex h-full w-full items-center justify-center">
-                <span className="font-display text-[10vw] leading-none tracking-tight text-foreground/10 sm:text-[7vw]">
-                  {post.title.split(" ").slice(0, 2).join(" ")}
-                </span>
-              </div>
-            </div>
-          )}
+          ) : null}
 
           <MarkdownRenderer
             markdown={post.content}

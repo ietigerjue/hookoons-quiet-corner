@@ -56,6 +56,7 @@ function config() {
     token: process.env.LOCAL_PUBLISHER_TOKEN || DEFAULT_TOKEN,
     obsidianVaultPath: process.env.OBSIDIAN_VAULT_PATH || "",
     obsidianPostsDir: process.env.OBSIDIAN_POSTS_DIR || "",
+    obsidianImageDirs: process.env.OBSIDIAN_IMAGE_DIRS || "",
     deployHookUrl: process.env.VERCEL_DEPLOY_HOOK_URL || "",
     projectRoot: PROJECT_ROOT,
   };
@@ -173,6 +174,7 @@ function statusPayload() {
   const cfg = config();
   return {
     obsidianPostsDir: cfg.obsidianPostsDir,
+    obsidianImageDirs: cfg.obsidianImageDirs,
     blogPostsDir: path.join(PROJECT_ROOT, "src", "content", "posts"),
     gitBranch: git.branch,
     gitRemote: git.remote,
@@ -225,9 +227,23 @@ function validatePostFileNames(files) {
 
 async function validateFiles(files) {
   const cfg = config();
-  const sourcePaths = await resolveSelectedFiles(files);
+  const fileNames = validatePostFileNames(files);
   const results = [];
-  for (const sourcePath of sourcePaths) {
+  for (const fileName of fileNames) {
+    let sourcePath;
+    try {
+      sourcePath = (await resolveSourcePost(fileName, cfg)).sourcePath;
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      results.push({
+        fileName,
+        valid: false,
+        errors: [message],
+        warnings: [],
+      });
+      continue;
+    }
+
     const validation = await validateObsidianPost(sourcePath, cfg);
     const scanPost = state.posts.find((post) => post.absolutePath === sourcePath);
     const errors = [...validation.errors];

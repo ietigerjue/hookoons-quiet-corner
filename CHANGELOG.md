@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-06-22
+
+### Changed
+
+- Expanded Obsidian pasted-image resolution to scan sibling `图片` / `images` folders and optional `OBSIDIAN_IMAGE_DIRS` paths.
+- Documented `OBSIDIAN_IMAGE_DIRS` in the README, Vercel guide, Publisher Dashboard guide, and Obsidian publish workflow.
+
 ## 2026-06-21
 
 ### Changed
@@ -8,6 +15,10 @@
 - Reworked `/projects` into a project-series index with `/projects/$slug` detail pages that list matching blog posts.
 - Made project cards derive from published post frontmatter so new `project` values create series cards and empty series disappear automatically.
 - Updated About current focus and Tags page copy to use bilingual English-first, Chinese-second descriptions.
+- Fixed the local Publisher Dashboard so missing Obsidian source files return validation errors instead of crashing the server.
+- Fixed Obsidian pasted image publishing so `![[Pasted image...]]` assets are copied before wiki links are converted.
+- Improved publisher title fallback for date-prefixed or incomplete frontmatter titles by using the full filename title.
+- Removed the generated fallback cover block from blog detail pages when a post has no cover.
 
 ## 2026-06-20
 

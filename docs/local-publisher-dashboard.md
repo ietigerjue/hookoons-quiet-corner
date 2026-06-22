@@ -25,6 +25,7 @@ Create `.env.local` in the repository root:
 ```env
 OBSIDIAN_VAULT_PATH=/path/to/your/obsidian/vault
 OBSIDIAN_POSTS_DIR=/path/to/your/obsidian/vault/Blog
+OBSIDIAN_IMAGE_DIRS=/path/to/your/obsidian/vault/图片
 LOCAL_PUBLISHER_PORT=4789
 LOCAL_PUBLISHER_HOST=127.0.0.1
 LOCAL_PUBLISHER_TOKEN=change-this-local-token
@@ -33,7 +34,7 @@ VERCEL_DEPLOY_HOOK_URL=
 
 `.env.local` is ignored by `.gitignore`. Do not commit real local paths, tokens, or deploy hook URLs.
 
-`OBSIDIAN_POSTS_DIR` is the folder the Dashboard scans for `*.md` files. `LOCAL_PUBLISHER_TOKEN` protects every `/api/*` request.
+`OBSIDIAN_POSTS_DIR` is the folder the Dashboard scans for `*.md` files. `OBSIDIAN_IMAGE_DIRS` is optional and can point to extra image folders, such as a Memory Base `图片` folder. `LOCAL_PUBLISHER_TOKEN` protects every `/api/*` request.
 
 ## Start The Dashboard
 
@@ -210,7 +211,7 @@ draft: false
 
 ### Images not found
 
-Place the image next to the note, under the vault root, or in `attachments` / `Attachments`.
+Place the image next to the note, under the vault root, in `attachments` / `Attachments`, in a sibling `图片` / `images` folder, or add the folder to `OBSIDIAN_IMAGE_DIRS`.
 
 ### Build failed
 

@@ -112,12 +112,38 @@ function splitFrontmatter(raw, filePath = "source post") {
   return { data, body };
 }
 
-function normalizeFrontmatter(data, date, slug, options = {}) {
+function titleFromFilenameTitle(value) {
+  return String(value).normalize("NFKC").trim().replace(/[_-]+/gu, " ").replace(/\s+/gu, " ");
+}
+
+function shouldUseFilenameTitle(title, filenameTitle) {
+  if (!title) return true;
+
+  const normalizedTitle = normalizeSlug(title, "title");
+  const normalizedFilenameTitle = normalizeSlug(filenameTitle, "filename title");
+  const datePrefixedTitle = title.match(/^(\d{4}-\d{2}-\d{2})-(.+)$/u)?.[2] ?? "";
+
+  return (
+    normalizedTitle !== normalizedFilenameTitle &&
+    (normalizedFilenameTitle.startsWith(normalizedTitle) ||
+      (datePrefixedTitle && normalizeSlug(datePrefixedTitle, "title") !== normalizedFilenameTitle))
+  );
+}
+
+function normalizeFrontmatter(data, date, slug, fileTitle, options = {}) {
   const errors = [];
   const warnings = [];
 
-  if (typeof data.title !== "string" || data.title.trim() === "") {
-    errors.push('frontmatter field "title" is required');
+  let title = typeof data.title === "string" ? data.title.trim() : "";
+  if (shouldUseFilenameTitle(title, fileTitle)) {
+    if (title) {
+      warnings.push(
+        `frontmatter title "${title}" does not match filename title; using "${titleFromFilenameTitle(fileTitle)}"`,
+      );
+    } else {
+      warnings.push(`frontmatter field "title" is missing; using filename title "${fileTitle}"`);
+    }
+    title = titleFromFilenameTitle(fileTitle);
   }
   const titleEnSource = data.titleEn ?? data.title_en ?? data.englishTitle;
   if (titleEnSource !== undefined && typeof titleEnSource !== "string") {
@@ -144,7 +170,7 @@ function normalizeFrontmatter(data, date, slug, options = {}) {
 
   return {
     frontmatter: {
-      title: typeof data.title === "string" ? data.title.trim() : "",
+      title,
       titleEn: typeof titleEnSource === "string" ? titleEnSource.trim() : "",
       description: typeof data.description === "string" ? data.description.trim() : "",
       date,
@@ -193,7 +219,13 @@ function parseFilename(filePath) {
     );
   }
   const slug = normalizeSlug(match[2], fileName);
-  return { fileName, outputFileName: `${match[1]}-${slug}.md`, date: match[1], slug };
+  return {
+    fileName,
+    outputFileName: `${match[1]}-${slug}.md`,
+    date: match[1],
+    slug,
+    fileTitle: match[2],
+  };
 }
 
 export function normalizeSlug(value, source = "slug") {
@@ -306,18 +338,18 @@ export function convertObsidianLinks(markdown, options = {}) {
     });
 
     next = next
-      .replace(/\[\[([^|\]]+)\|([^\]]+)\]\]/g, (match, rawTarget, rawLabel) => {
+      .replace(/(^|[^!])\[\[([^|\]]+)\|([^\]]+)\]\]/g, (match, prefix, rawTarget, rawLabel) => {
         const target = String(rawTarget).trim();
         const label = String(rawLabel).trim();
         const href = articleHref(target);
-        if (href) return `[${label}](${href})`;
-        return label;
+        if (href) return `${prefix}[${label}](${href})`;
+        return `${prefix}${label}`;
       })
-      .replace(/\[\[([^\]]+)\]\]/g, (match, rawTarget) => {
+      .replace(/(^|[^!])\[\[([^\]]+)\]\]/g, (match, prefix, rawTarget) => {
         const target = String(rawTarget).trim();
         const href = articleHref(target);
-        if (href) return `[${target}](${href})`;
-        return target;
+        if (href) return `${prefix}[${target}](${href})`;
+        return `${prefix}${target}`;
       });
 
     return next;
@@ -326,10 +358,12 @@ export function convertObsidianLinks(markdown, options = {}) {
 
 export async function parseObsidianFile(filePath, options = {}) {
   const realPath = (await realpathIfExists(filePath)) ?? path.resolve(filePath);
-  const { fileName, outputFileName, date, slug } = parseFilename(realPath);
+  const { fileName, outputFileName, date, slug, fileTitle } = parseFilename(realPath);
   const raw = await fs.readFile(realPath, "utf8");
   const { data, body } = splitFrontmatter(raw, realPath);
-  const normalized = normalizeFrontmatter(data, date, slug, { collectOnly: options.collectOnly });
+  const normalized = normalizeFrontmatter(data, date, slug, fileTitle, {
+    collectOnly: options.collectOnly,
+  });
 
   return {
     id: fileName,
@@ -350,11 +384,44 @@ export async function parseObsidianFile(filePath, options = {}) {
 
 async function resolveAllowedRoots(options = {}) {
   const roots = [];
-  for (const root of [options.obsidianPostsDir, options.obsidianVaultPath].filter(Boolean)) {
+  for (const root of [
+    options.obsidianPostsDir,
+    options.obsidianVaultPath,
+    ...imageSearchDirCandidates(options),
+  ].filter(Boolean)) {
     const real = await realpathIfExists(path.resolve(root));
     if (real) roots.push(real);
   }
-  return roots;
+  return [...new Set(roots)];
+}
+
+function splitPathList(value) {
+  if (!value) return [];
+  if (Array.isArray(value)) return value;
+  return String(value)
+    .split(path.delimiter)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function imageSearchDirCandidates(options = {}) {
+  const configured = splitPathList(options.obsidianImageDirs ?? process.env.OBSIDIAN_IMAGE_DIRS);
+  const roots = [options.obsidianPostsDir, options.obsidianVaultPath].filter(Boolean);
+  const candidates = [...configured];
+
+  for (const root of roots) {
+    const resolved = path.resolve(root);
+    candidates.push(path.join(resolved, "图片"));
+    candidates.push(path.join(resolved, "images"));
+    candidates.push(path.join(resolved, "attachments"));
+    candidates.push(path.join(resolved, "Attachments"));
+    candidates.push(path.join(path.dirname(resolved), "图片"));
+    candidates.push(path.join(path.dirname(resolved), "images"));
+    candidates.push(path.join(path.dirname(resolved), "attachments"));
+    candidates.push(path.join(path.dirname(resolved), "Attachments"));
+  }
+
+  return [...new Set(candidates)];
 }
 
 async function findImagePath(ref, post, options = {}) {
@@ -371,6 +438,8 @@ async function findImagePath(ref, post, options = {}) {
       candidates.push(path.resolve(root, cleanRef));
       candidates.push(path.resolve(root, "attachments", cleanRef));
       candidates.push(path.resolve(root, "Attachments", cleanRef));
+      candidates.push(path.resolve(root, "图片", cleanRef));
+      candidates.push(path.resolve(root, "images", cleanRef));
     }
   }
 

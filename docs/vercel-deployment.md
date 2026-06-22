@@ -50,6 +50,7 @@ These are for local publishing only. Do not configure them in Vercel:
 ```env
 OBSIDIAN_VAULT_PATH=/path/to/your/obsidian/vault
 OBSIDIAN_POSTS_DIR=/path/to/your/obsidian/vault/Blog
+OBSIDIAN_IMAGE_DIRS=/path/to/your/obsidian/vault/图片
 LOCAL_PUBLISHER_PORT=4789
 LOCAL_PUBLISHER_HOST=127.0.0.1
 LOCAL_PUBLISHER_TOKEN=change-this-local-token
@@ -207,7 +208,7 @@ Confirm `@tailwindcss/vite` is still installed and that `src/styles.css` is impo
 
 ### Obsidian path error
 
-Obsidian paths are local-only. They are required for `npm run publisher` and `npm run publish:obsidian`, not for Vercel.
+Obsidian paths are local-only. `OBSIDIAN_POSTS_DIR` is required for `npm run publisher` and filename-based `npm run publish:obsidian`. `OBSIDIAN_IMAGE_DIRS` is optional for extra pasted-image folders. None of these are required for Vercel.
 
 ### Publisher accidentally exposed
 
