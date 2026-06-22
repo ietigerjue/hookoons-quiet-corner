@@ -7,15 +7,15 @@ slug: "lovable-to-real-blog"
 tags: ["Blog", "Coding", "Product", "Obsidian", "Workflow"]
 cover: ""
 draft: false
+publish: true
 source: "obsidian"
-project: "MyBlog Engineering Log"
+featured: true
 ---
-
 这个博客的第一行代码不是手写的，是 Lovable 生成的。
 
 2026 年 6 月 18 日，我在 Lovable 里描述了一个安静的、暖白色调的、带卡片阵列的博客，AI 给了我一个完整的原型：首页有滚动横幅、文章卡片排列整齐、About 页面安静地点着头像和简介。那一刻的感觉是"对了"——视觉语言对了。
 
-![[Pasted image 20260622132307.png]]
+![Pasted image 20260622132307.png](/images/posts/lovable-to-real-blog/Pasted-image-20260622132307.png)
 
 但原型和能长期维护的工程之间，有一条需要亲自走过的线。这篇文章记录这条线上每一段路，重点讲我自认为做得最漂亮的部分：**本地 Publisher Dashboard + Obsidian 写作发布机制**。
 
@@ -61,7 +61,7 @@ Lovable 给的原型有这些好东西：
 
 一条命令启动后，浏览器打开一个本地地址，你会看到一个中文界面：
 
-![[Pasted image 20260622132238.png]]
+![Pasted image 20260622132238.png](/images/posts/lovable-to-real-blog/Pasted-image-20260622132238.png)
 
 **左侧是文章列表**，每篇文章显示文件名、标题、日期、标签和状态：
 
@@ -145,14 +145,6 @@ Lovable 给的原型有这些好东西：
 | 发布 | 自建 Publisher Dashboard | 本地操作、一键发布、自动 commit |
 | 写作 | Obsidian | 本地 Markdown、笔记链接、图片粘贴 |
 
-## 五、还没做完的事
-
-- 默认的社交分享封面图还没做
-- 生产域名还需要最终配置
-- 移动端的视觉细节还需要真人用不同手机过一遍
-
-这些都是可以慢慢补的——不妨先把文章写起来。走到这一步，工程的部分已经就位了。剩下的就是把内容填满。
-
 ---
 
-*写于 2026 年 6 月 19 日，工程化改造完成的那天晚上。后续几天在 AI 编程助手的交替接力下陆续完善了中文体验、SEO 和图片预览。*
+*写于 2026 年 6 月 19 日
