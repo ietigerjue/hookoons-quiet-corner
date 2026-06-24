@@ -249,6 +249,9 @@ async function handlePublish(req, res) {
   const validations = await validateFiles(files);
   const invalid = validations.filter((item) => !item.valid);
   if (invalid.length > 0) {
+    for (const v of validations) {
+      log(`validate: ${v.fileName}: ${v.valid ? 'OK' : v.errors.join(' | ')}`);
+    }
     log("publish_failed: validation failed");
     return json(res, 400, { error: "Validation failed", validations, logs: state.lastLogs });
   }
@@ -489,9 +492,9 @@ function dashboardHtml() {
     function escapeHtml(v) { return String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
     async function loadAll() {
       try {
-        const [status, postData, logData] = await Promise.all([api('/api/status'), api('/api/posts'), api('/api/logs')]);
-        renderStatus(status); posts = postData.posts; renderRows(); setLog(logData.logs);
-      } catch (e) { setLog(e.message); }
+        const [status, postData] = await Promise.all([api('/api/status'), api('/api/posts')]);
+        renderStatus(status); posts = postData.posts; renderRows();
+      } catch (e) { /* silent */ }
     }
     async function action(name, payload) {
       try {
@@ -530,7 +533,13 @@ function dashboardHtml() {
     document.querySelector('#deploy').onclick = () => action('/api/deploy-hook');
     els.statusFilter.onchange = renderRows; els.search.oninput = renderRows;
     els.selectAll.onchange = () => document.querySelectorAll('.pick').forEach(i => { i.checked = els.selectAll.checked; });
-    loadAll(); setInterval(loadAll, 5000);
+    async function loadLogs() {
+      try {
+        const data = await api('/api/logs');
+        setLog(data.logs);
+      } catch (e) { /* silent */ }
+    }
+    loadAll(); loadLogs(); setInterval(loadAll, 5000);
   </script>
 </body>
 </html>`;
