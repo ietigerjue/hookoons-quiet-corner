@@ -460,7 +460,11 @@ function dashboardHtml() {
     async function api(path, opts = {}) {
       const res = await fetch(path, { ...opts, headers: { 'Content-Type': 'application/json', ...(opts.headers || {}) } });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || res.statusText);
+      if (!res.ok) {
+        const err = new Error(data.error || res.statusText);
+        err.data = data;
+        throw err;
+      }
       return data;
     }
     function selectedFiles() { return [...document.querySelectorAll('.pick:checked')].map(i => i.value); }
@@ -494,7 +498,14 @@ function dashboardHtml() {
         const data = await api(name, { method:'POST', body: JSON.stringify(payload || {}) });
         setLog(data.logs || data.validations?.map(v => v.fileName + ': ' + (v.valid ? '校验通过' : v.errors.join('; '))) || '完成');
         await loadAll();
-      } catch (e) { setLog(e.message); }
+      } catch (e) {
+        if (e.data?.validations) {
+          const lines = e.data.validations.map(v => v.fileName + ': ' + (v.valid ? '✓' : '✗ ' + v.errors.join('; ')));
+          setLog(lines.join('\\n'));
+        } else {
+          setLog(e.message);
+        }
+      }
     }
     document.querySelector('#refresh').onclick = () => action('/api/refresh');
     document.querySelector('#validate').onclick = () => action('/api/validate', { files: selectedFiles() });
