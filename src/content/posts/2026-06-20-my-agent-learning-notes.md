@@ -5,11 +5,11 @@ date: "2026-06-20"
 slug: "my-agent-learning-notes"
 tags: ["Agent", "AI", "Notes"]
 cover: ""
-draft: false
+draft: true
+publish: false
+unpublishedAt: "2026-06-24T12:22:25.097Z"
 source: "obsidian"
-project: "AI Agent Workflow Lab"
 ---
-
 The most useful thing I have learned about agents is that they are better inside a loop than inside a wish. A clear task, a tight diff, and a repeatable check do more than a grand prompt.
 
 ## The loop
