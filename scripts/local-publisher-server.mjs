@@ -20,7 +20,6 @@ import {
 const PROJECT_ROOT = process.cwd();
 const DEFAULT_HOST = "127.0.0.1";
 const DEFAULT_PORT = 4789;
-const DEFAULT_TOKEN = "change-this-local-token";
 const POST_FILENAME_HELP =
   "文件名必须是 YYYY-MM-DD-title.md；title 部分可使用中英文、数字、空格、下划线和连字符。";
 
@@ -53,7 +52,6 @@ function config() {
   return {
     host: process.env.LOCAL_PUBLISHER_HOST || DEFAULT_HOST,
     port: Number(process.env.LOCAL_PUBLISHER_PORT || DEFAULT_PORT),
-    token: process.env.LOCAL_PUBLISHER_TOKEN || DEFAULT_TOKEN,
     obsidianVaultPath: process.env.OBSIDIAN_VAULT_PATH || "",
     obsidianPostsDir: process.env.OBSIDIAN_POSTS_DIR || "",
     obsidianImageDirs: process.env.OBSIDIAN_IMAGE_DIRS || "",
@@ -103,31 +101,6 @@ function readBody(req) {
     });
     req.on("error", reject);
   });
-}
-
-function tokenFrom(req, url) {
-  return (
-    req.headers["x-publisher-token"] || req.headers.authorization?.replace(/^Bearer\s+/i, "") || ""
-  );
-}
-
-function requireToken(req, res, url) {
-  const expected = config().token;
-  if (expected === DEFAULT_TOKEN && req.method !== "GET") {
-    json(res, 403, {
-      error:
-        "LOCAL_PUBLISHER_TOKEN 仍是示例默认值。请在 .env.local 中改成自定义 token，重启 publisher，并在页面右上角输入同一个 token。",
-    });
-    return false;
-  }
-  if (tokenFrom(req, url) !== expected) {
-    json(res, 401, {
-      error:
-        "访问令牌不正确。请确认页面右上角输入的 token 与 .env.local 中的 LOCAL_PUBLISHER_TOKEN 完全一致。",
-    });
-    return false;
-  }
-  return true;
 }
 
 function filterPosts(posts, url) {
@@ -180,7 +153,7 @@ function statusPayload() {
     gitRemote: git.remote,
     gitStatusSummary: git.status,
     hasUnrelatedChanges: Boolean(git.status.trim()),
-    tokenUsesDefault: cfg.token === DEFAULT_TOKEN,
+
     lastScanAt: state.lastScanAt,
     watcherReady: state.watcherReady,
     projectRoot: PROJECT_ROOT,
@@ -357,8 +330,6 @@ async function triggerDeployHook(res) {
 }
 
 async function handleApi(req, res, url) {
-  if (!requireToken(req, res, url)) return;
-
   try {
     if (req.method === "GET" && url.pathname === "/api/posts") {
       return json(res, 200, { posts: filterPosts(state.posts, url) });
@@ -410,7 +381,6 @@ function dashboardHtml() {
     .wrap { max-width:1280px; margin:0 auto; padding:18px 22px; }
     h1 { margin:0; font-family: Georgia, serif; font-weight:500; font-size:28px; }
     .top { display:flex; align-items:center; justify-content:space-between; gap:18px; }
-    .token { display:flex; gap:8px; align-items:center; color:var(--muted); font-size:13px; }
     input, select, button, textarea { font:inherit; }
     input, select { border:1px solid var(--border); border-radius:7px; background:var(--panel); color:var(--ink); padding:8px 10px; }
     button { border:1px solid var(--border); border-radius:7px; background:var(--panel); color:var(--ink); padding:8px 11px; cursor:pointer; }
@@ -450,7 +420,6 @@ function dashboardHtml() {
         <h1>Obsidian 博客发布面板</h1>
         <div class="small">仅本地使用 · 127.0.0.1 · 基于 Git 的发布流程</div>
       </div>
-      <label class="token">访问令牌 <input id="token" type="password" placeholder="LOCAL_PUBLISHER_TOKEN" /></label>
     </div>
   </header>
   <main class="wrap">
@@ -477,7 +446,7 @@ function dashboardHtml() {
   </main>
   <script>
     const els = {
-      token: document.querySelector('#token'), status: document.querySelector('#status'), rows: document.querySelector('#rows'),
+      status: document.querySelector('#status'), rows: document.querySelector('#rows'),
       statusFilter: document.querySelector('#statusFilter'), search: document.querySelector('#search'), log: document.querySelector('#log'),
       selectAll: document.querySelector('#selectAll')
     };
@@ -488,11 +457,8 @@ function dashboardHtml() {
       missing_assets: '资源缺失', not_publishable: '不可发布', error: '错误', missing: '缺失'
     };
     const copyLabels = { published: '已发布', draft: '草稿', missing: '缺失', deleted: '已删除', changed: '已变更', unpublished: '已撤下', missing_assets: '资源缺失' };
-    els.token.value = localStorage.getItem('publisherToken') || '${DEFAULT_TOKEN}';
-    els.token.addEventListener('change', () => { localStorage.setItem('publisherToken', els.token.value); loadAll(); });
-    function token() { return els.token.value; }
     async function api(path, opts = {}) {
-      const res = await fetch(path, { ...opts, headers: { 'Content-Type': 'application/json', 'X-Publisher-Token': token(), ...(opts.headers || {}) } });
+      const res = await fetch(path, { ...opts, headers: { 'Content-Type': 'application/json', ...(opts.headers || {}) } });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || res.statusText);
       return data;
@@ -503,7 +469,7 @@ function dashboardHtml() {
       const items = [
         ['Obsidian Blog', s.obsidianPostsDir || '未配置'], ['Git 分支', s.gitBranch + (s.gitBranch !== 'main' ? ' · 非 main' : '')],
         ['Git 状态', s.gitStatusSummary ? '有未提交变更' : '干净'], ['监听器', s.watcherReady ? '已就绪' : '未就绪'],
-        ['访问令牌', s.tokenUsesDefault ? '仍是示例默认值，写操作已禁用' : '已自定义'],
+
         ['上次扫描', s.lastScanAt || '从未扫描'], ['项目目录', s.projectRoot], ['博客发布目录', s.blogPostsDir], ['远端仓库', s.gitRemote || '无'],
         ['部署 Hook', s.deployHookConfigured ? '已配置' : '未配置'], ['最近错误', s.lastError || '无']
       ];
@@ -577,10 +543,6 @@ async function start() {
     console.error("LOCAL_PUBLISHER_PORT must be a valid port number.");
     process.exit(1);
   }
-  if (cfg.token === DEFAULT_TOKEN) {
-    log("warning: LOCAL_PUBLISHER_TOKEN is using the example default; change it in .env.local.");
-  }
-
   await refreshScan();
   if (cfg.obsidianPostsDir && existsSync(cfg.obsidianPostsDir)) {
     const watcher = chokidar.watch("**/*.md", {
