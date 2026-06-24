@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hookoon&apos;s Quiet Corner</title>
+    <link>https://hookoon.xyz</link>
+    <description>Personal knowledge &amp; work blog — Price Action, AI Agents, blog engineering, materials science notes.</description>
+    <language>en</language>
+    <lastBuildDate>Wed, 24 Jun 2026 12:00:00 GMT</lastBuildDate>
+    <atom:link href="https://hookoon.xyz/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Harness和Loop工程实践</title>
+      <link>https://hookoon.xyz/blog/harness%E5%92%8Cloop%E5%B7%A5%E7%A8%8B</link>
+      <guid isPermaLink="true">https://hookoon.xyz/blog/harness%E5%92%8Cloop%E5%B7%A5%E7%A8%8B</guid>
+      <pubDate>Wed, 24 Jun 2026 12:00:00 GMT</pubDate>
+      <description>&lt;p&gt;Harness和Loop工程&lt;/p&gt;</description>
+            <category>Blog</category>
+      <category>Workflow</category>
+    </item>
+    <item>
+      <title>从 Lovable 原型到真实博客：一个本地 Publisher + Obsidian 部署工作流的诞生 / From Lovable Prototype to Real Blog</title>
+      <link>https://hookoon.xyz/blog/lovable-to-real-blog</link>
+      <guid isPermaLink="true">https://hookoon.xyz/blog/lovable-to-real-blog</guid>
+      <pubDate>Fri, 19 Jun 2026 12:00:00 GMT</pubDate>
+      <description>&lt;p&gt;详细记录如何把一个 AI 生成的 Lovable 原型，改造成一个可长期维护的 TanStack Start 博客。亮点是自建的本地 Publisher Dashboard + Obsidian 写作发布系统。&lt;/p&gt;</description>
+            <category>Blog</category>
+      <category>Coding</category>
+      <category>Product</category>
+      <category>Obsidian</category>
+      <category>Workflow</category>
+    </item>
+    <item>
+      <title>2026-06-19-PA复盘</title>
+      <link>https://hookoon.xyz/blog/pa%E5%A4%8D%E7%9B%98</link>
+      <guid isPermaLink="true">https://hookoon.xyz/blog/pa%E5%A4%8D%E7%9B%98</guid>
+      <pubDate>Fri, 19 Jun 2026 12:00:00 GMT</pubDate>
+      <description>&lt;p&gt;复盘TSLA&lt;/p&gt;</description>
+            <category>Blog</category>
+      <category>Trade</category>
+    </item>
+    <item>
+      <title>Why I Build This Blog</title>
+      <link>https://hookoon.xyz/blog/why-i-build-this-blog</link>
+      <guid isPermaLink="true">https://hookoon.xyz/blog/why-i-build-this-blog</guid>
+      <pubDate>Thu, 18 Jun 2026 12:00:00 GMT</pubDate>
+      <description>&lt;p&gt;A quiet corner for long-form notes, project logs, and the slower thinking that feeds a real personal knowledge system.&lt;/p&gt;</description>
+            <category>Blog</category>
+      <category>Notes</category>
+      <category>Product</category>
+    </item>
+  </channel>
+</rss>

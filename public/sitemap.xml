@@ -1,61 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://localhost:3000/</loc>
-    <lastmod>2026-06-20</lastmod>
+    <loc>https://hookoon.xyz/</loc>
+    <lastmod>2026-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>http://localhost:3000/blog</loc>
-    <lastmod>2026-06-20</lastmod>
+    <loc>https://hookoon.xyz/blog</loc>
+    <lastmod>2026-06-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>http://localhost:3000/projects</loc>
-    <lastmod>2026-06-20</lastmod>
+    <loc>https://hookoon.xyz/projects</loc>
+    <lastmod>2026-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://localhost:3000/about</loc>
-    <lastmod>2026-06-20</lastmod>
+    <loc>https://hookoon.xyz/about</loc>
+    <lastmod>2026-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://localhost:3000/projects/ai-agent-workflow-lab</loc>
-    <lastmod>2026-06-20</lastmod>
+    <loc>https://hookoon.xyz/projects/myblog-engineering-log</loc>
+    <lastmod>2026-06-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://localhost:3000/projects/myblog-engineering-log</loc>
-    <lastmod>2026-06-20</lastmod>
+    <loc>https://hookoon.xyz/blog/harness%E5%92%8Cloop%E5%B7%A5%E7%A8%8B</loc>
+    <lastmod>2026-06-24</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://localhost:3000/blog/my-agent-learning-notes</loc>
-    <lastmod>2026-06-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>http://localhost:3000/blog/lovable-to-real-blog</loc>
+    <loc>https://hookoon.xyz/blog/lovable-to-real-blog</loc>
     <lastmod>2026-06-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://localhost:3000/blog/pa%E5%A4%8D%E7%9B%98</loc>
+    <loc>https://hookoon.xyz/blog/pa%E5%A4%8D%E7%9B%98</loc>
     <lastmod>2026-06-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://localhost:3000/blog/why-i-build-this-blog</loc>
+    <loc>https://hookoon.xyz/blog/why-i-build-this-blog</loc>
     <lastmod>2026-06-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

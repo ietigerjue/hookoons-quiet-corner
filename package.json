@@ -7,8 +7,9 @@
   "scripts": {
     "dev": "vite dev",
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
-    "generate:discovery": "node scripts/generate-discovery.mjs",
-    "prebuild": "npm run generate:sitemap",
+    "generate:rss": "node scripts/generate-rss.mjs",
+    "generate:og-image": "node scripts/generate-og-image.mjs",
+    "prebuild": "npm run generate:sitemap && npm run generate:rss && npm run generate:og-image",
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "start": "vite preview",

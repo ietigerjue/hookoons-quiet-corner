@@ -1,62 +1,54 @@
 {
-  "site": "http://localhost:3000",
+  "site": "https://hookoon.xyz",
   "entries": [
     {
       "title": "Hookoon's Quiet Corner",
-      "url": "http://localhost:3000/",
+      "url": "https://hookoon.xyz/",
       "path": "/",
-      "lastmod": "2026-06-20",
+      "lastmod": "2026-06-24",
       "tags": []
     },
     {
       "title": "Blog",
-      "url": "http://localhost:3000/blog",
+      "url": "https://hookoon.xyz/blog",
       "path": "/blog",
-      "lastmod": "2026-06-20",
+      "lastmod": "2026-06-24",
       "tags": []
     },
     {
       "title": "Projects",
-      "url": "http://localhost:3000/projects",
+      "url": "https://hookoon.xyz/projects",
       "path": "/projects",
-      "lastmod": "2026-06-20",
+      "lastmod": "2026-06-24",
       "tags": []
     },
     {
       "title": "About",
-      "url": "http://localhost:3000/about",
+      "url": "https://hookoon.xyz/about",
       "path": "/about",
-      "lastmod": "2026-06-20",
-      "tags": []
-    },
-    {
-      "title": "Ai Agent Workflow Lab",
-      "url": "http://localhost:3000/projects/ai-agent-workflow-lab",
-      "path": "/projects/ai-agent-workflow-lab",
-      "lastmod": "2026-06-20",
+      "lastmod": "2026-06-24",
       "tags": []
     },
     {
       "title": "Myblog Engineering Log",
-      "url": "http://localhost:3000/projects/myblog-engineering-log",
+      "url": "https://hookoon.xyz/projects/myblog-engineering-log",
       "path": "/projects/myblog-engineering-log",
-      "lastmod": "2026-06-20",
+      "lastmod": "2026-06-24",
       "tags": []
     },
     {
-      "title": "My Agent Learning Notes",
-      "url": "http://localhost:3000/blog/my-agent-learning-notes",
-      "path": "/blog/my-agent-learning-notes",
-      "lastmod": "2026-06-20",
+      "title": "Harness和Loop工程实践",
+      "url": "https://hookoon.xyz/blog/harness%E5%92%8Cloop%E5%B7%A5%E7%A8%8B",
+      "path": "/blog/harness和loop工程",
+      "lastmod": "2026-06-24",
       "tags": [
-        "Agent",
-        "AI",
-        "Notes"
+        "Blog",
+        "Workflow"
       ]
     },
     {
       "title": "从 Lovable 原型到真实博客：一个本地 Publisher + Obsidian 部署工作流的诞生",
-      "url": "http://localhost:3000/blog/lovable-to-real-blog",
+      "url": "https://hookoon.xyz/blog/lovable-to-real-blog",
       "path": "/blog/lovable-to-real-blog",
       "lastmod": "2026-06-19",
       "tags": [
@@ -69,7 +61,7 @@
     },
     {
       "title": "2026-06-19-PA复盘",
-      "url": "http://localhost:3000/blog/pa%E5%A4%8D%E7%9B%98",
+      "url": "https://hookoon.xyz/blog/pa%E5%A4%8D%E7%9B%98",
       "path": "/blog/pa复盘",
       "lastmod": "2026-06-19",
       "tags": [
@@ -79,7 +71,7 @@
     },
     {
       "title": "Why I Build This Blog",
-      "url": "http://localhost:3000/blog/why-i-build-this-blog",
+      "url": "https://hookoon.xyz/blog/why-i-build-this-blog",
       "path": "/blog/why-i-build-this-blog",
       "lastmod": "2026-06-18",
       "tags": [
