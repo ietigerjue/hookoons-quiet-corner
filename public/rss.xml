@@ -5,8 +5,18 @@
     <link>https://hookoon.xyz</link>
     <description>Personal knowledge &amp; work blog — Price Action, AI Agents, blog engineering, materials science notes.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 24 Jun 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jul 2026 12:00:00 GMT</lastBuildDate>
     <atom:link href="https://hookoon.xyz/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>给 LLM 搭一个不会忘的知识库</title>
+      <link>https://hookoon.xyz/blog/llm-wiki%E7%9F%A5%E8%AF%86%E5%BA%93%E5%AE%9E%E8%B7%B5</link>
+      <guid isPermaLink="true">https://hookoon.xyz/blog/llm-wiki%E7%9F%A5%E8%AF%86%E5%BA%93%E5%AE%9E%E8%B7%B5</guid>
+      <pubDate>Wed, 01 Jul 2026 12:00:00 GMT</pubDate>
+      <description>&lt;p&gt;用 LLM Wiki 方法论把碎片阅读编译成长期知识资产&lt;/p&gt;</description>
+            <category>Blog</category>
+      <category>Workflow</category>
+      <category>AI</category>
+    </item>
     <item>
       <title>Harness和Loop工程实践</title>
       <link>https://hookoon.xyz/blog/harness%E5%92%8Cloop%E5%B7%A5%E7%A8%8B</link>
@@ -15,6 +25,15 @@
       <description>&lt;p&gt;Harness和Loop工程&lt;/p&gt;</description>
             <category>Blog</category>
       <category>Workflow</category>
+    </item>
+    <item>
+      <title>Price Action Terminology</title>
+      <link>https://hookoon.xyz/blog/price-action-%E6%9C%AF%E8%AF%AD</link>
+      <guid isPermaLink="true">https://hookoon.xyz/blog/price-action-%E6%9C%AF%E8%AF%AD</guid>
+      <pubDate>Mon, 22 Jun 2026 12:00:00 GMT</pubDate>
+      <description>&lt;p&gt;Price Action Video1&lt;/p&gt;</description>
+            <category>Blog</category>
+      <category>Trade</category>
     </item>
     <item>
       <title>从 Lovable 原型到真实博客：一个本地 Publisher + Obsidian 部署工作流的诞生 / From Lovable Prototype to Real Blog</title>

@@ -5,36 +5,47 @@
       "title": "Hookoon's Quiet Corner",
       "url": "https://hookoon.xyz/",
       "path": "/",
-      "lastmod": "2026-06-24",
+      "lastmod": "2026-07-01",
       "tags": []
     },
     {
       "title": "Blog",
       "url": "https://hookoon.xyz/blog",
       "path": "/blog",
-      "lastmod": "2026-06-24",
+      "lastmod": "2026-07-01",
       "tags": []
     },
     {
       "title": "Projects",
       "url": "https://hookoon.xyz/projects",
       "path": "/projects",
-      "lastmod": "2026-06-24",
+      "lastmod": "2026-07-01",
       "tags": []
     },
     {
       "title": "About",
       "url": "https://hookoon.xyz/about",
       "path": "/about",
-      "lastmod": "2026-06-24",
+      "lastmod": "2026-07-01",
       "tags": []
     },
     {
       "title": "Myblog Engineering Log",
       "url": "https://hookoon.xyz/projects/myblog-engineering-log",
       "path": "/projects/myblog-engineering-log",
-      "lastmod": "2026-06-24",
+      "lastmod": "2026-07-01",
       "tags": []
+    },
+    {
+      "title": "给 LLM 搭一个不会忘的知识库",
+      "url": "https://hookoon.xyz/blog/llm-wiki%E7%9F%A5%E8%AF%86%E5%BA%93%E5%AE%9E%E8%B7%B5",
+      "path": "/blog/llm-wiki知识库实践",
+      "lastmod": "2026-07-01",
+      "tags": [
+        "Blog",
+        "Workflow",
+        "AI"
+      ]
     },
     {
       "title": "Harness和Loop工程实践",
@@ -44,6 +55,16 @@
       "tags": [
         "Blog",
         "Workflow"
+      ]
+    },
+    {
+      "title": "Price Action Terminology",
+      "url": "https://hookoon.xyz/blog/price-action-%E6%9C%AF%E8%AF%AD",
+      "path": "/blog/price-action-术语",
+      "lastmod": "2026-06-22",
+      "tags": [
+        "Blog",
+        "Trade"
       ]
     },
     {
