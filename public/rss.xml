@@ -2,15 +2,43 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hookoon&apos;s Quiet Corner</title>
-    <link>https://hookoon.xyz</link>
+    <link>http://localhost:3000</link>
     <description>Personal knowledge &amp; work blog — Price Action, AI Agents, blog engineering, materials science notes.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 01 Jul 2026 12:00:00 GMT</lastBuildDate>
-    <atom:link href="https://hookoon.xyz/rss.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Tue, 07 Jul 2026 12:00:00 GMT</lastBuildDate>
+    <atom:link href="http://localhost:3000/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Price Action 一些反思</title>
+      <link>http://localhost:3000/blog/price-action-%E4%B8%80%E4%BA%9B%E5%8F%8D%E6%80%9D</link>
+      <guid isPermaLink="true">http://localhost:3000/blog/price-action-%E4%B8%80%E4%BA%9B%E5%8F%8D%E6%80%9D</guid>
+      <pubDate>Tue, 07 Jul 2026 12:00:00 GMT</pubDate>
+      <description>&lt;p&gt;Price Action&lt;/p&gt;</description>
+            <category>Blog</category>
+      <category>Trade</category>
+    </item>
+    <item>
+      <title>2026-07-02-NVDIA复盘</title>
+      <link>http://localhost:3000/blog/nvdia%E5%A4%8D%E7%9B%98</link>
+      <guid isPermaLink="true">http://localhost:3000/blog/nvdia%E5%A4%8D%E7%9B%98</guid>
+      <pubDate>Thu, 02 Jul 2026 12:00:00 GMT</pubDate>
+      <description>&lt;p&gt;NVDIA复盘&lt;/p&gt;</description>
+            <category>Blog</category>
+      <category>Trade</category>
+    </item>
+    <item>
+      <title>AI Skill 怎么写才不翻车：从 mattpocock 的五个失败模式说起</title>
+      <link>http://localhost:3000/blog/writing-great-skills</link>
+      <guid isPermaLink="true">http://localhost:3000/blog/writing-great-skills</guid>
+      <pubDate>Thu, 02 Jul 2026 12:00:00 GMT</pubDate>
+      <description>&lt;p&gt;开发者 Matt Pocock 公开了他长期打磨的 Skill 写作指南，提炼了一套让 AI &amp;quot;按规矩办事&amp;quot;的系统方法。本文拆解核心框架和五种最常见的翻车模式&lt;/p&gt;</description>
+            <category>Blog</category>
+      <category>AI</category>
+      <category>Engineering</category>
+    </item>
     <item>
       <title>给 LLM 搭一个不会忘的知识库</title>
-      <link>https://hookoon.xyz/blog/llm-wiki%E7%9F%A5%E8%AF%86%E5%BA%93%E5%AE%9E%E8%B7%B5</link>
-      <guid isPermaLink="true">https://hookoon.xyz/blog/llm-wiki%E7%9F%A5%E8%AF%86%E5%BA%93%E5%AE%9E%E8%B7%B5</guid>
+      <link>http://localhost:3000/blog/llm-wiki%E7%9F%A5%E8%AF%86%E5%BA%93%E5%AE%9E%E8%B7%B5</link>
+      <guid isPermaLink="true">http://localhost:3000/blog/llm-wiki%E7%9F%A5%E8%AF%86%E5%BA%93%E5%AE%9E%E8%B7%B5</guid>
       <pubDate>Wed, 01 Jul 2026 12:00:00 GMT</pubDate>
       <description>&lt;p&gt;用 LLM Wiki 方法论把碎片阅读编译成长期知识资产&lt;/p&gt;</description>
             <category>Blog</category>
@@ -18,9 +46,19 @@
       <category>AI</category>
     </item>
     <item>
+      <title>API 账单从 ¥3000 到 ¥300：Token 优化的正确打开方式</title>
+      <link>http://localhost:3000/blog/prompt-caching-cost-optimization</link>
+      <guid isPermaLink="true">http://localhost:3000/blog/prompt-caching-cost-optimization</guid>
+      <pubDate>Wed, 01 Jul 2026 12:00:00 GMT</pubDate>
+      <description>&lt;p&gt;把 Token 优化拆成两个维度——API 层的 Prompt Caching 和 Context 层的工程管控，给出每条路径的核心原理和具体做法&lt;/p&gt;</description>
+            <category>Blog</category>
+      <category>AI</category>
+      <category>Engineering</category>
+    </item>
+    <item>
       <title>Harness和Loop工程实践</title>
-      <link>https://hookoon.xyz/blog/harness%E5%92%8Cloop%E5%B7%A5%E7%A8%8B</link>
-      <guid isPermaLink="true">https://hookoon.xyz/blog/harness%E5%92%8Cloop%E5%B7%A5%E7%A8%8B</guid>
+      <link>http://localhost:3000/blog/harness%E5%92%8Cloop%E5%B7%A5%E7%A8%8B</link>
+      <guid isPermaLink="true">http://localhost:3000/blog/harness%E5%92%8Cloop%E5%B7%A5%E7%A8%8B</guid>
       <pubDate>Wed, 24 Jun 2026 12:00:00 GMT</pubDate>
       <description>&lt;p&gt;Harness和Loop工程&lt;/p&gt;</description>
             <category>Blog</category>
@@ -28,8 +66,8 @@
     </item>
     <item>
       <title>Price Action Terminology</title>
-      <link>https://hookoon.xyz/blog/price-action-%E6%9C%AF%E8%AF%AD</link>
-      <guid isPermaLink="true">https://hookoon.xyz/blog/price-action-%E6%9C%AF%E8%AF%AD</guid>
+      <link>http://localhost:3000/blog/price-action-%E6%9C%AF%E8%AF%AD</link>
+      <guid isPermaLink="true">http://localhost:3000/blog/price-action-%E6%9C%AF%E8%AF%AD</guid>
       <pubDate>Mon, 22 Jun 2026 12:00:00 GMT</pubDate>
       <description>&lt;p&gt;Price Action Video1&lt;/p&gt;</description>
             <category>Blog</category>
@@ -37,8 +75,8 @@
     </item>
     <item>
       <title>从 Lovable 原型到真实博客：一个本地 Publisher + Obsidian 部署工作流的诞生 / From Lovable Prototype to Real Blog</title>
-      <link>https://hookoon.xyz/blog/lovable-to-real-blog</link>
-      <guid isPermaLink="true">https://hookoon.xyz/blog/lovable-to-real-blog</guid>
+      <link>http://localhost:3000/blog/lovable-to-real-blog</link>
+      <guid isPermaLink="true">http://localhost:3000/blog/lovable-to-real-blog</guid>
       <pubDate>Fri, 19 Jun 2026 12:00:00 GMT</pubDate>
       <description>&lt;p&gt;详细记录如何把一个 AI 生成的 Lovable 原型，改造成一个可长期维护的 TanStack Start 博客。亮点是自建的本地 Publisher Dashboard + Obsidian 写作发布系统。&lt;/p&gt;</description>
             <category>Blog</category>
@@ -49,8 +87,8 @@
     </item>
     <item>
       <title>2026-06-19-PA复盘</title>
-      <link>https://hookoon.xyz/blog/pa%E5%A4%8D%E7%9B%98</link>
-      <guid isPermaLink="true">https://hookoon.xyz/blog/pa%E5%A4%8D%E7%9B%98</guid>
+      <link>http://localhost:3000/blog/pa%E5%A4%8D%E7%9B%98</link>
+      <guid isPermaLink="true">http://localhost:3000/blog/pa%E5%A4%8D%E7%9B%98</guid>
       <pubDate>Fri, 19 Jun 2026 12:00:00 GMT</pubDate>
       <description>&lt;p&gt;复盘TSLA&lt;/p&gt;</description>
             <category>Blog</category>
@@ -58,8 +96,8 @@
     </item>
     <item>
       <title>Why I Build This Blog</title>
-      <link>https://hookoon.xyz/blog/why-i-build-this-blog</link>
-      <guid isPermaLink="true">https://hookoon.xyz/blog/why-i-build-this-blog</guid>
+      <link>http://localhost:3000/blog/why-i-build-this-blog</link>
+      <guid isPermaLink="true">http://localhost:3000/blog/why-i-build-this-blog</guid>
       <pubDate>Thu, 18 Jun 2026 12:00:00 GMT</pubDate>
       <description>&lt;p&gt;A quiet corner for long-form notes, project logs, and the slower thinking that feeds a real personal knowledge system.&lt;/p&gt;</description>
             <category>Blog</category>
