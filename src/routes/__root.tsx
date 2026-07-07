@@ -112,6 +112,23 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="zh-CN">
       <head>
         <HeadContent />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+(function() {
+  var retries = 0;
+  var maxRetries = 3;
+  window.addEventListener('vite:preloadError', function(event) {
+    if (retries < maxRetries) {
+      retries++;
+      event.preventDefault();
+      window.location.reload();
+    }
+  });
+})();
+            `.trim(),
+          }}
+        />
       </head>
       <body>
         {children}
