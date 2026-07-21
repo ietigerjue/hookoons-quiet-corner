@@ -3,7 +3,7 @@ title: "Price Action 突破"
 description: "notes about BO in Price Action"
 date: "2026-07-21"
 slug: "price-action-突破"
-tags: ["Blog", "Tag2"]
+tags: ["Trade"]
 cover: ""
 draft: false
 publish: true
