@@ -91,6 +91,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: siteConfig.author },
     ],
     links: [
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
       { rel: "stylesheet", href: appCss },
       { rel: "sitemap", type: "application/xml", title: "Sitemap", href: "/sitemap.xml" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
